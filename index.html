@@ -1297,28 +1297,41 @@
                1. 头部：极简的微吸顶样式，适配亮暗模式
                ========================================== */
             header { 
-                padding: 12px 20px !important; 
+                padding: 10px 10px !important; 
                 position: relative; 
                 z-index: 1000; 
+                flex-wrap: nowrap;
+                gap: 6px;
+                align-items: center;
             }
             .mobile-menu-btn { 
                 display: block;
             } 
             .logo { 
-                width: 100% !important; 
+                width: auto !important; 
+                flex: 1 1 auto;
+                min-width: 0;
                 justify-content: center !important; 
-                gap: 10px !important; 
-                margin-bottom: 12px !important; 
-                font-size: calc(1.45rem * var(--font-scale)) !important;
+                gap: 6px !important; 
+                margin-bottom: 0 !important; 
+                font-size: calc(1.2rem * var(--font-scale)) !important;
+                overflow: hidden;
+            }
+            .mobile-menu-btn {
+                margin-left: auto;
+                flex: 0 0 auto;
+                font-size: 18px;
+                padding: 2px 8px;
+                border-radius: 7px;
             }
             /* 手机端徽章极限放大，确保绝对清晰 */
             .nav-logo-img { 
-                height: 52px !important; 
-                width: 52px !important; 
-                padding: 3px !important; 
+                height: 44px !important; 
+                width: 44px !important; 
+                padding: 2px !important; 
                 border-radius: 50% !important; 
             }
-            .logo-divider { height: 38px !important; margin: 0 10px !important; }
+            .logo-divider { height: 24px !important; margin: 0 6px !important; }
             
             /* ==========================================
                2. 现代全屏沉浸式菜单 (Fullscreen Overlay)
