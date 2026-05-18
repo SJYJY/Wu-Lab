@@ -156,7 +156,12 @@
             transform: scale(1.1);
             box-shadow: 0 5px 15px rgba(0,229,255,0.4);
         }
-        .nav-links { display: flex; gap: max(1vw, 15px); }
+        /* 导航菜单区：弹性间距与绝对垂直对齐 */
+        .nav-links { 
+            display: flex; 
+            align-items: center;
+            gap: max(1vw, 15px); 
+        }
         .nav-tools { display: flex; align-items: center; gap: 10px; position: relative; }
         .mobile-menu-btn { 
             display: none; 
@@ -172,6 +177,9 @@
             color: var(--text-sub); text-decoration: none; font-size: calc(1rem * var(--font-scale)); font-weight: 400; cursor: pointer;
             transition: color 0.3s, text-shadow 0.3s; padding: 5px 0;
             white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 2px;
         }
         .nav-link:hover, .nav-link.active { color: var(--text-main); text-shadow: 0 0 10px var(--primary-glow); border-bottom: 1px solid var(--primary-glow); }
         .btn-home {
@@ -1293,7 +1301,7 @@
             text-shadow: none;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 1080px) {
             /* ==========================================
                1. 头部：极简的微吸顶样式，适配亮暗模式
                ========================================== */
