@@ -129,9 +129,8 @@
         /* 导航栏 */
         header {
             display: flex; 
-            justify-content: flex-start; 
+            justify-content: space-between; 
             align-items: center;
-            gap: 40px;
             padding: 15px max(2vw, 20px); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
             background: var(--header-bg); z-index: 50;
         }
@@ -163,9 +162,9 @@
         .nav-links { 
             display: flex; 
             align-items: center;
-            gap: max(1vw, 15px); 
+            gap: max(2.5vw, 35px); 
         }
-        .nav-tools { display: flex; align-items: center; gap: 10px; position: relative; margin-left: auto; }
+        .nav-tools { display: flex; align-items: center; gap: 10px; position: relative; }
         .mobile-menu-btn { 
             display: none; 
             background: transparent; 
@@ -1633,7 +1632,7 @@
 </div>
                     <div class="prof-info">
                         <h2 data-i18n="prof_name">吴 畏</h2>
-                        <p class="tags" data-i18n="prof_title">PI : 吴畏，上海交通大学特聘教授、博导，医学院松江研究院资深研究员；蚌埠医科大学特聘教授；Alto Neuroscience（纽交所上市公司）联合创始人；国家高层次领军人才</p>
+                        <p class="tags" data-i18n="prof_title">吴畏，上海交通大学特聘教授、博导，医学院松江研究院资深研究员；蚌埠医科大学特聘教授；Alto Neuroscience（纽交所上市公司）联合创始人；国家高层次领军人才</p>
                         <span class="email">✉ weiwuneuro@sjtu.edu.cn</span>
                         <p style="color:var(--text-sub); line-height: 1.8; margin-top: 14px;" data-i18n="prof_research">
                             研究方向: 神经精神疾病精准诊疗及临床转化、脑信号分析模型与算法
@@ -1905,7 +1904,7 @@
                 
                 // 吴畏教授页面
                 prof_name: '吴 畏',
-                prof_title: 'PI : 吴畏，上海交通大学特聘教授、博导，医学院松江研究院资深研究员；蚌埠医科大学特聘教授；Alto Neuroscience（纽交所上市公司）联合创始人；国家高层次领军人才',
+                prof_title: '吴畏，上海交通大学特聘教授、博导，医学院松江研究院资深研究员；蚌埠医科大学特聘教授；Alto Neuroscience（纽交所上市公司）联合创始人；国家高层次领军人才',
                 prof_research: '研究方向: AI驱动的脑疾病精准诊疗及临床转化、脑信号处理与机器学习',
                 prof_summary: '在学术界和工业界均拥有丰富研发和管理经验，国家高层次领军人才。现任上海市神经科学学会神经调控分会副主任、IEEE生物医学信号处理技术委员会委员，并担任IEEE Transactions on Affective Computing及IEEE Journal of Biomedical and Health Informatics等期刊编委。发表期刊论文100余篇，以通讯作者/第一作者在Nature Biotechology、Science Translational Medicine、Nature Biomedical Engineering、Nature Mental Health、Science Advances、IEEE Transactions on Pattern Analysis and Machine Intelligence、IEEE Signal Processing Magazine等期刊发表论文多篇，在脑电信号分析算法和精神疾病诊疗生物标志物研究方面做出了重要贡献。',
                 prof_alto: '吴畏教授是精神疾病精准诊疗公司 Alto Neuroscience（纽交所上市）的联合创始人和前任首席数据科学官，构建了该领域首个AI标志物转化平台，推动了精神疾病诊疗迈入精准医学时代。',
@@ -2025,7 +2024,7 @@
                 
                 // Prof. Wu Page
                 prof_name: 'Wu Wei',
-                prof_title: 'PI: Wu Wei, Distinguished Professor & PhD Supervisor at Shanghai Jiao Tong University, Senior Researcher at Songjiang Research Institute, School of Medicine; Distinguished Professor at Bengbu Medical University; Co-founder of Alto Neuroscience (NYSE-listed); National Leading Talent',
+                prof_title: 'Wu Wei, Distinguished Professor & PhD Supervisor at Shanghai Jiao Tong University, Senior Researcher at Songjiang Research Institute, School of Medicine; Distinguished Professor at Bengbu Medical University; Co-founder of Alto Neuroscience (NYSE-listed); National Leading Talent',
                 prof_research: 'Research: AI-driven precise diagnosis and treatment of brain diseases with clinical translation, brain signal processing and machine learning',
                 prof_summary: 'Extensive research and management experience in both academia and industry. Recognized as a National Leading Talent, he currently serves as Deputy Chair of the Neuromodulation Branch of the Shanghai Neuroscience Society, is a member of the IEEE Biomedical Signal Processing Technical Committee, and sits on the editorial boards of journals including IEEE Transactions on Affective Computing and IEEE Journal of Biomedical and Health Informatics. He has published over 100 peer‑reviewed articles; as corresponding or first author he has multiple papers in Nature Biotechnology, Science Translational Medicine, Nature Biomedical Engineering, Nature Mental Health, Science Advances, IEEE Transactions on Pattern Analysis and Machine Intelligence, and IEEE Signal Processing Magazine. His work has made significant contributions to EEG signal analysis algorithms and biomarkers for diagnosis and treatment of psychiatric disorders.',
                 prof_alto: 'Prof. Wu Wei is a co-founder and former Chief Data Scientist of Alto Neuroscience (NYSE-listed). He built the first AI biomarker translation platform in this field, advancing psychiatric diagnosis and treatment into the era of precision medicine.',
