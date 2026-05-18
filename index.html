@@ -132,8 +132,30 @@
             padding: 20px 60px; backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
             background: var(--header-bg); z-index: 50;
         }
-        .logo { font-size: calc(1.4rem * var(--font-scale)); font-weight: 300; letter-spacing: 2px; cursor: pointer; display: flex; align-items: center; gap: 15px;}
+        .logo { font-size: calc(1.8rem * var(--font-scale)); font-weight: 300; letter-spacing: 2px; cursor: pointer; display: flex; align-items: center; gap: 15px;}
         .logo span { color: var(--neon-border); text-shadow: 0 0 10px var(--primary-glow-dim); }
+        /* 导航栏：超大圆形徽章与分隔线样式 */
+        .logo-divider {
+            width: 1.5px;
+            height: 48px;
+            background: var(--text-soft);
+            margin: 0 18px;
+            opacity: 0.6;
+        }
+        .nav-logo-img {
+            height: 68px;
+            width: 68px;
+            object-fit: contain;
+            background: #ffffff;
+            padding: 4px;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nav-logo-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,229,255,0.4);
+        }
         .nav-links { display: flex; gap: 30px; }
         .nav-tools { display: flex; align-items: center; gap: 10px; position: relative; }
         .mobile-menu-btn { 
@@ -1282,6 +1304,21 @@
             .mobile-menu-btn { 
                 display: block;
             } 
+            .logo { 
+                width: 100% !important; 
+                justify-content: center !important; 
+                gap: 10px !important; 
+                margin-bottom: 12px !important; 
+                font-size: calc(1.45rem * var(--font-scale)) !important;
+            }
+            /* 手机端徽章极限放大，确保绝对清晰 */
+            .nav-logo-img { 
+                height: 52px !important; 
+                width: 52px !important; 
+                padding: 3px !important; 
+                border-radius: 50% !important; 
+            }
+            .logo-divider { height: 38px !important; margin: 0 10px !important; }
             
             /* ==========================================
                2. 现代全屏沉浸式菜单 (Fullscreen Overlay)
@@ -1538,7 +1575,9 @@
     <div id="main-app">
         <header>
             <div class="logo" onclick="navTo('home')">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <img src="交大.jpg" alt="上海交通大学" class="nav-logo-img">
+                <img src="交医.jpg" alt="上海交大医学院" class="nav-logo-img">
+                <div class="logo-divider"></div>
                 DECODE <span>Lab</span>
             </div>
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
