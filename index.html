@@ -129,25 +129,25 @@
         /* 导航栏 */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 60px; backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
+            padding: 15px max(2vw, 20px); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
             background: var(--header-bg); z-index: 50;
         }
-        .logo { font-size: calc(1.8rem * var(--font-scale)); font-weight: 300; letter-spacing: 2px; cursor: pointer; display: flex; align-items: center; gap: 15px;}
+        .logo { font-size: calc(1.5rem * var(--font-scale)); font-weight: 300; letter-spacing: 2px; cursor: pointer; display: flex; align-items: center; gap: 10px; white-space: nowrap; flex-shrink: 0;}
         .logo span { color: var(--neon-border); text-shadow: 0 0 10px var(--primary-glow-dim); }
-        /* 导航栏：超大圆形徽章与分隔线样式 */
+        /* 导航栏：自适应圆形徽章与分隔线 */
         .logo-divider {
             width: 1.5px;
-            height: 48px;
+            height: 38px;
             background: var(--text-soft);
-            margin: 0 18px;
+            margin: 0 12px;
             opacity: 0.6;
         }
         .nav-logo-img {
-            height: 68px;
-            width: 68px;
+            height: 50px;
+            width: 50px;
             object-fit: contain;
             background: #ffffff;
-            padding: 4px;
+            padding: 3px;
             border-radius: 50%;
             box-shadow: 0 3px 10px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -156,7 +156,7 @@
             transform: scale(1.1);
             box-shadow: 0 5px 15px rgba(0,229,255,0.4);
         }
-        .nav-links { display: flex; gap: 30px; }
+        .nav-links { display: flex; gap: max(1vw, 15px); }
         .nav-tools { display: flex; align-items: center; gap: 10px; position: relative; }
         .mobile-menu-btn { 
             display: none; 
@@ -171,6 +171,7 @@
         .nav-link { 
             color: var(--text-sub); text-decoration: none; font-size: calc(1rem * var(--font-scale)); font-weight: 400; cursor: pointer;
             transition: color 0.3s, text-shadow 0.3s; padding: 5px 0;
+            white-space: nowrap;
         }
         .nav-link:hover, .nav-link.active { color: var(--text-main); text-shadow: 0 0 10px var(--primary-glow); border-bottom: 1px solid var(--primary-glow); }
         .btn-home {
