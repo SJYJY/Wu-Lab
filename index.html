@@ -312,18 +312,23 @@
             box-shadow: 0 0 0 1px rgba(31, 95, 151, 0.35) inset;
         }
         body.light-mode .options-panel {
-            border-color: rgba(31, 95, 151, 0.28);
+            border-color: rgba(31, 95, 151, 0.5);
+            background: rgba(244, 248, 252, 0.96);
+        }
+        body.light-mode .options-title {
+            color: #102a46;
+            border-bottom-color: rgba(31, 95, 151, 0.3);
         }
         body.light-mode .opt-item:hover {
-            background: rgba(31, 95, 151, 0.12);
+            background: rgba(39, 110, 178, 0.12);
         }
         .options-panel {
             position: absolute;
             top: calc(100% + 10px);
             right: 0;
             width: 240px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: rgba(1, 3, 8, 0.9);
+            border: 1px solid rgba(0, 229, 255, 0.4);
             border-radius: 16px;
             padding: 12px;
             backdrop-filter: blur(24px) saturate(160%);
@@ -335,10 +340,11 @@
         .options-panel.open { display: block; }
         .options-title {
             font-size: calc(0.9rem * var(--font-scale));
-            color: var(--text-sub);
+            color: var(--text-main);
             margin: 2px 0 10px;
             padding: 0 2px 8px;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+            font-weight: 500;
         }
         .opt-item {
             display: flex;
@@ -349,8 +355,10 @@
             color: var(--text-main);
             font-size: calc(0.92rem * var(--font-scale));
             gap: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
         }
-        .opt-item:hover { background: rgba(255,255,255,0.1); }
+        .opt-item:hover { background: rgba(0, 229, 255, 0.15); }
         .opt-item input { accent-color: var(--neon-border); }
         .opt-hint {
             margin-top: 8px;
@@ -431,7 +439,7 @@
         /* 内容区容器 */
         #content-wrapper {
             flex: 1; overflow-y: auto; padding: 40px 60px;
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
             transform: translateY(0);
             will-change: transform;
         }
@@ -589,7 +597,7 @@
         }
 
         /* 4. 图片图库网格 */
-        .gallery-grid { display: grid; grid-auto-flow: column; grid-auto-columns: 325px; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 0px; scrollbar-width: none; }
+        .gallery-grid { display: grid; grid-auto-flow: column; grid-auto-columns: 325px; gap: 20px; overflow-x: auto; scroll-behavior: auto; padding-bottom: 0px; scrollbar-width: none; }
         .gallery-grid::-webkit-scrollbar { display: none; }
         .gallery-item { aspect-ratio: 16/9; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--text-sub); transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease, background 0.24s ease; cursor: pointer; min-width: 0; width: 100%; }
         .gallery-item:hover {
@@ -1169,7 +1177,7 @@
             gap: 14px;
             overflow-x: auto;
             overflow-y: hidden;
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
             padding-bottom: 0px;
             scrollbar-width: none;
         }
@@ -2171,8 +2179,8 @@
         let wheelDirection = 0;
         let wheelPeekTimer = null;
         let wheelDeltaEMA = 55;
-        const WHEEL_MIN_THRESHOLD = 280;
-        const WHEEL_MAX_THRESHOLD = 520;
+        const WHEEL_MIN_THRESHOLD = 1200;
+        const WHEEL_MAX_THRESHOLD = 2000;
         const WHEEL_COOLDOWN_MS = 560;
         const EDGE_TOLERANCE = 48;
         
