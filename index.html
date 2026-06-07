@@ -1796,13 +1796,14 @@
                 <script id="team-members-csv-b64" type="text/plain">role,name,display_name,email,direction,photo
 科研助理,龚怡赟,龚怡赟,assistant.a@sjtu.edu.cn,,
 科研助理,梁燕,梁燕,assistant.b@sjtu.edu.cn,,
-科研助理,陈阿园,陈阿园,assistant.c@sjtu.edu.cn,cTBS,
+科研助理,陈阿圆,陈阿圆,assistant.c@sjtu.edu.cn,cTBS,
 博士后,王文龙,王文龙,postdoc.1@sjtu.edu.cn,,
 博士后,刘锦,刘锦,postdoc.2@sjtu.edu.cn,,
 博士后,刘宇,刘宇,postdoc.3@sjtu.edu.cn,MRI,
 博士生,植弘毅,植弘毅,phd.x@sjtu.edu.cn,,
 博士生,杨焘,杨焘,phd.y@sjtu.edu.cn,,
 博士生,刘俊麟,刘俊麟,phd.z@sjtu.edu.cn,脑电与强化学习的结合,
+博士生,侍江烽,侍江烽,,,
 直博生,朱思仪,朱思仪,direct-phd.q@sjtu.edu.cn,cTBS,
 硕士生,许伊娴,许伊娴,master.m4@sjtu.edu.cn,高危群体转化,
 硕士生,胥思源,胥思源,master.m2@sjtu.edu.cn,MSA vs PD,
@@ -1810,6 +1811,7 @@
 硕士生,贾杜金,贾杜金,dj_jia@sjtu.edu.cn,ASD,
 本科生,宋佳怡,宋佳怡,undergrad.sjy@sjtu.edu.cn,,
 本科生,赵浙涵,赵浙涵,undergrad.2@sjtu.edu.cn,,
+本科生,钱书帆,钱书帆,,,
 本科生,张东东,张东东,undergrad.3@sjtu.edu.cn,,
 本科生,庄晓熙,庄晓熙,undergrad.4@sjtu.edu.cn,,</script>
             </section>
@@ -1953,12 +1955,12 @@
                 // 团队成员
                 team_activity: '集体活动',
                 team_members: '课题组成员',
-                team_assistant: '科研助理（3）',
-                team_postdoc: '博士后（3）',
-                team_phd: '博士生（3）',
-                team_direct: '直博生（1）',
-                team_master: '硕士生（4）',
-                team_undergraduate: '本科生（4）',
+                team_assistant: '科研助理',
+                team_postdoc: '博士后',
+                team_phd: '博士生',
+                team_direct: '直博生',
+                team_master: '硕士生',
+                team_undergraduate: '本科生',
 
                 prof_education_item1: '2006-2012年 清华大学生物医学工程系，博士(麻省理工学院联合培养)',
                 prof_education_item2: '2003-2006 年 清华大学生物医学工程系，硕士',
@@ -2073,12 +2075,12 @@
                 // Team Members
                 team_activity: 'Group Activities',
                 team_members: 'Lab Members',
-                team_assistant: 'Research Assistants (3)',
-                team_postdoc: 'Postdoctoral Fellows (3)',
-                team_phd: 'PhD Students (3)',
-                team_direct: 'Direct PhD (1)',
-                team_master: 'Master Students (4)',
-                team_undergraduate: 'Undergraduate Students (4)',
+                team_assistant: 'Research Assistants',
+                team_postdoc: 'Postdoctoral Fellows',
+                team_phd: 'PhD Students',
+                team_direct: 'Direct PhD',
+                team_master: 'Master Students',
+                team_undergraduate: 'Undergraduate Students',
 
                 prof_education_item1: '2006-2012, Department of Biomedical Engineering, Tsinghua University, PhD (joint training with MIT)',
                 prof_education_item2: '2003-2006, Department of Biomedical Engineering, Tsinghua University, Master’s degree',
@@ -2155,6 +2157,7 @@
             // （原先用 JS 控制中文标题隐藏的代码可以删掉了，因为现在全交由 CSS 更优雅地控制）
 
             updateLanguageButtons();
+            updateTeamRoleHeadings();
         }
 
         function updateLanguageButtons() {
@@ -2309,7 +2312,7 @@
                         (decoded.match(/博士生/g) || []).length,
                         (decoded.match(/硕士生/g) || []).length,
                         (decoded.match(/直博生/g) || []).length,
-                        (decoded.match(/�/g) || []).length * -5
+                        (decoded.match(/ /g) || []).length * -5
                     ].reduce((sum, value) => sum + value, 0);
 
                     if (score > bestScore) {
@@ -2351,12 +2354,38 @@
                 .then(buffer => decodeCsvBytes(new Uint8Array(buffer)));
         }
 
+        function parseCsvLine(line) {
+            const cells = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i += 1) {
+                const char = line[i];
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i += 1;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    cells.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+
+            cells.push(current.trim());
+            return cells;
+        }
+
         function parseTeamMembersCSV(csvText) {
             const lines = csvText.replace(/\r/g, '').split('\n').map(line => line.trim()).filter(Boolean);
             if (lines.length <= 1) return [];
 
             return lines.slice(1).map(line => {
-                const cells = line.split(',');
+                const cells = parseCsvLine(line);
                 const role = (cells[0] || '').trim();
                 const name = (cells[1] || '').trim();
                 const displayName = (cells[2] || '').trim();
@@ -2369,14 +2398,72 @@
             }).filter(member => member.role && member.name);
         }
 
-        const MEMBER_PHOTO_ALIASES = {
-            '科研助理|陈阿园': '科研助理 陈阿圆.jpg'
-        };
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
+
+        function escapeAttr(value) {
+            return escapeHtml(value).replace(/`/g, '&#96;');
+        }
+
+        function encodeAssetPath(path) {
+            const normalizedPath = String(path || '').trim().replace(/\\/g, '/');
+            if (!normalizedPath) return '';
+            if (/^(https?:|data:|blob:)/i.test(normalizedPath)) return normalizedPath;
+            return normalizedPath.split('/').map(segment => encodeURIComponent(segment)).join('/');
+        }
+
+        const MEMBER_PHOTO_ALIASES = {};
 
         function resolveMemberPhotoPath(member) {
             const aliasKey = `${member.role}|${member.name}`;
             const photoPath = (MEMBER_PHOTO_ALIASES[aliasKey] || member.photo || `${member.role} ${member.name}.jpg`).trim();
-            return photoPath ? encodeURI(photoPath) : '';
+            return encodeAssetPath(photoPath);
+        }
+
+        const TEAM_ROLE_ORDER = ['科研助理', '博士后', '博士生', '直博生', '硕士生', '本科生'];
+        const TEAM_ROLE_LABEL_KEYS = {
+            '科研助理': 'team_assistant',
+            '博士后': 'team_postdoc',
+            '博士生': 'team_phd',
+            '直博生': 'team_direct',
+            '硕士生': 'team_master',
+            '本科生': 'team_undergraduate'
+        };
+
+        function getTeamRoleHeading(role, count) {
+            const labelKey = TEAM_ROLE_LABEL_KEYS[role];
+            const label = translations[currentLanguage]?.[labelKey] || role;
+            return currentLanguage === 'en' ? `${label} (${count})` : `${label}（${count}）`;
+        }
+
+        function updateTeamRoleHeadings() {
+            document.querySelectorAll('.team-group h4[data-team-role]').forEach(heading => {
+                const role = heading.getAttribute('data-team-role') || '';
+                const count = Number(heading.getAttribute('data-team-count') || 0);
+                heading.textContent = getTeamRoleHeading(role, count);
+            });
+        }
+
+        function markMemberPhotoReady(img) {
+            const card = img.closest('.member-card');
+            if (card) card.dataset.photo = img.getAttribute('src') || '';
+            const placeholder = img.nextElementSibling;
+            if (placeholder) placeholder.style.display = 'none';
+        }
+
+        function markMemberPhotoMissing(img) {
+            img.style.display = 'none';
+            const placeholder = img.nextElementSibling;
+            if (placeholder) placeholder.style.display = 'flex';
+            const card = img.closest('.member-card');
+            if (card) card.dataset.photo = '';
         }
 
         function renderTeamMembers(members) {
@@ -2388,18 +2475,8 @@
                 return;
             }
 
-            const roleOrder = ['科研助理', '博士后', '博士生', '直博生', '硕士生', '本科生'];
-            const roleLabels = {
-                '科研助理': 'team_assistant',
-                '博士后': 'team_postdoc',
-                '博士生': 'team_phd',
-                '直博生': 'team_direct',
-                '硕士生': 'team_master',
-                '本科生': 'team_undergraduate'
-            };
-
             const grouped = {};
-            roleOrder.forEach(role => {
+            TEAM_ROLE_ORDER.forEach(role => {
                 grouped[role] = members.filter(m => m.role === role);
             });
 
@@ -2407,19 +2484,25 @@
             Object.entries(grouped).forEach(([role, groupMembers]) => {
                 if (groupMembers.length === 0) return;
                 const count = groupMembers.length;
-                const label = roleLabels[role];
+                const safeRole = escapeAttr(role);
                 html += `<div class="team-group">
-                    <h4 data-i18n="${label}">${role}（${count}）</h4>
+                    <h4 data-team-role="${safeRole}" data-team-count="${count}">${escapeHtml(getTeamRoleHeading(role, count))}</h4>
                     <div class="member-grid">`;
 
                 groupMembers.forEach(member => {
                     const photoPath = resolveMemberPhotoPath(member);
+                    const safeName = escapeAttr(member.name);
+                    const safeRoleValue = escapeAttr(member.role);
+                    const safeEmail = escapeAttr(member.email);
+                    const safeDirection = escapeAttr(member.direction);
+                    const safePhotoPath = escapeAttr(photoPath);
+                    const displayName = escapeHtml(member.display_name || member.name);
                     const photoHtml = photoPath
-                        ? `<img src="${photoPath}" alt="${member.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="member-photo-placeholder" style="display:none;">待放照片</div>`
+                        ? `<img src="${safePhotoPath}" alt="${safeName}" loading="lazy" onload="markMemberPhotoReady(this)" onerror="markMemberPhotoMissing(this)"><div class="member-photo-placeholder" style="display:none;">待放照片</div>`
                         : '<div class="member-photo-placeholder">待放照片</div>';
-                    html += `<div class="member-card" onclick="showMemberDetail(this)" data-name="${member.name}" data-role="${member.role}" data-email="${member.email}" data-direction="${member.direction}" data-photo="${photoPath}">
+                    html += `<div class="member-card" onclick="showMemberDetail(this)" data-name="${safeName}" data-role="${safeRoleValue}" data-email="${safeEmail}" data-direction="${safeDirection}" data-photo="">
                         <div class="member-photo">${photoHtml}</div>
-                        <div class="member-role">${member.display_name}</div>
+                        <div class="member-role">${displayName}</div>
                     </div>`;
                 });
 
@@ -2428,6 +2511,7 @@
             });
 
             container.innerHTML = html;
+            updateTeamRoleHeadings();
         }
 
         function loadTeamMembers() {
@@ -2690,7 +2774,15 @@
             const photoImg = document.getElementById('modal-member-photo');
             const photoPlaceholder = document.getElementById('modal-member-photo-placeholder');
             if (photoWrap && photoBtn && photoImg && photoPlaceholder) {
+                photoImg.onload = null;
+                photoImg.onerror = null;
+                photoImg.removeAttribute('src');
+
                 if (photo) {
+                    photoImg.onerror = () => {
+                        photoBtn.style.display = 'none';
+                        photoPlaceholder.style.display = 'flex';
+                    };
                     photoImg.src = photo;
                     photoImg.alt = `${name} 的照片`;
                     photoBtn.style.display = 'block';
@@ -2722,9 +2814,13 @@
             const lightbox = document.getElementById('lightbox');
             document.getElementById('lightbox-title').textContent = title;
             const imageContent = document.getElementById('lightbox-image-content');
+            imageContent.replaceChildren();
             if (imageSrc) {
                 imageContent.className = '';
-                imageContent.innerHTML = `<img src="${imageSrc}" alt="${title}">`;
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.alt = title;
+                imageContent.appendChild(img);
             } else {
                 imageContent.className = 'lightbox-placeholder';
                 imageContent.textContent = '[ 图片 ]';
