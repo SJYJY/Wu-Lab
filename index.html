@@ -1782,7 +1782,11 @@
                 <div class="glass-panel">
                     <h2 class="section-title" data-i18n="team_activity">集体活动</h2>
                     <div class="gallery-grid" id="gallery-container">
+                        <div class="gallery-item lightbox-trigger" data-lightbox-title="奉贤会议" data-lightbox-image="课题组合照 奉贤会议.jpg"><img src="课题组合照 奉贤会议.jpg" alt="奉贤会议"></div>
                         <div class="gallery-item lightbox-trigger" data-lightbox-title="徐汇校区" data-lightbox-image="课题组合照 徐汇校区.jpg"><img src="课题组合照 徐汇校区.jpg" alt="徐汇校区"></div>
+                        <div class="gallery-item lightbox-trigger" data-lightbox-title="新年合照" data-lightbox-image="课题组合照 新年合照.jpg"><img src="课题组合照 新年合照.jpg" alt="新年合照"></div>
+                        <div class="gallery-item lightbox-trigger" data-lightbox-title="智能神经调控与脑机接口峰会" data-lightbox-image="课题组合照 智能神经调控与脑机接口峰会.jpg"><img src="课题组合照 智能神经调控与脑机接口峰会.jpg" alt="智能神经调控与脑机接口峰会"></div>
+                        <div class="gallery-item lightbox-trigger" data-lightbox-title="特别的生日" data-lightbox-image="课题组合照 特别的生日.jpg"><img src="课题组合照 特别的生日.jpg" alt="特别的生日"></div>
                         <div class="gallery-item lightbox-trigger" data-lightbox-title="莫干山团建" data-lightbox-image="课题组合照 莫干山团建.jpg"><img src="课题组合照 莫干山团建.jpg" alt="莫干山团建"></div>
                         <div class="gallery-item lightbox-trigger" data-lightbox-title="课题组聚餐" data-lightbox-image="课题组合照 课题组聚餐.jpg"><img src="课题组合照 课题组聚餐.jpg" alt="课题组聚餐"></div>
                         <div class="gallery-item lightbox-trigger" data-lightbox-title="采集脑电" data-lightbox-image="课题组合照 采集脑电.jpg"><img src="课题组合照 采集脑电.jpg" alt="采集脑电"></div>
@@ -1796,26 +1800,28 @@
                 </div>
 
                 <script id="team-members-csv-b64" type="text/plain">role,name,display_name,email,direction,photo
-科研助理,龚怡赟,龚怡赟,assistant.a@sjtu.edu.cn,,
-科研助理,梁燕,梁燕,assistant.b@sjtu.edu.cn,,
-科研助理,陈阿圆,陈阿圆,assistant.c@sjtu.edu.cn,cTBS,
-博士后,王文龙,王文龙,postdoc.1@sjtu.edu.cn,,
-博士后,刘锦,刘锦,postdoc.2@sjtu.edu.cn,,
-博士后,刘宇,刘宇,postdoc.3@sjtu.edu.cn,MRI,
-博士生,植弘毅,植弘毅,phd.x@sjtu.edu.cn,,
-博士生,杨焘,杨焘,phd.y@sjtu.edu.cn,,
-博士生,刘俊麟,刘俊麟,phd.z@sjtu.edu.cn,脑电与强化学习的结合,
+科研助理,龚怡赟,龚怡赟,,cTBS、ASD标志物挖掘、MDDI期药物疗效标志物挖掘、RETT基因治疗标志物挖掘,
+科研助理,梁燕,梁燕,,cTBS,
+科研助理,陈阿圆,陈阿圆,,,
+博士后,王文龙,王文龙,,,
+博士后,刘锦,刘锦,,,
+博士后,刘宇,刘宇,,MRI,
+博士后,植弘毅,植弘毅,,,
+博士后,朱敏,朱敏,,,
+博士生,杨焘,杨焘,,基于强化学习的呼吸机,
+博士生,刘俊麟,刘俊麟,,,
 博士生,侍江烽,侍江烽,,,
-直博生,朱思仪,朱思仪,direct-phd.q@sjtu.edu.cn,cTBS,
-硕士生,许伊娴,许伊娴,master.m4@sjtu.edu.cn,高危群体转化,
-硕士生,胥思源,胥思源,master.m2@sjtu.edu.cn,MSA vs PD,
-硕士生,徐蕾,徐蕾,master.m1@sjtu.edu.cn,自闭症候选基因发掘,
+直博生,朱思仪,朱思仪,,cTBS,
+硕士生,许伊娴,许伊娴,,高危群体转化,
+硕士生,胥思源,胥思源,,MSA vs PD、SLEEP,
+硕士生,徐蕾,徐蕾,,ASD,
 硕士生,贾杜金,贾杜金,dj_jia@sjtu.edu.cn,ASD,
-本科生,宋佳怡,宋佳怡,undergrad.sjy@sjtu.edu.cn,,
-本科生,赵浙涵,赵浙涵,undergrad.2@sjtu.edu.cn,,
-本科生,钱书帆,钱书帆,,,
-本科生,张东东,张东东,undergrad.3@sjtu.edu.cn,,
-本科生,庄晓熙,庄晓熙,undergrad.4@sjtu.edu.cn,,</script>
+硕士生,宋佳怡,宋佳怡,,,
+硕士生,钱书帆,钱书帆,,,
+硕士生,陆菁华,陆菁华,,,
+本科生,赵浙涵,赵浙涵,,,
+本科生,张东东,张东东,,,
+本科生,庄晓熙,庄晓熙,,</script>
             </section>
 
             <section id="contact" class="page-section">
@@ -2525,7 +2531,7 @@
                     console.error('加载内嵌成员数据失败:', err);
                     const container = document.getElementById('team-members-container');
                     if (container) {
-                        container.innerHTML = '<div class="info-list" style="margin-top:0; text-align:center; color:var(--text-sub);">成员数据未加载。请检查 main.html 内嵌数据是否完整。</div>';
+                        container.innerHTML = '<div class="info-list" style="margin-top:0; text-align:center; color:var(--text-sub);">成员数据未加载。请检查 index.html 内嵌数据是否完整。</div>';
                     }
                 });
                 return;
@@ -2538,7 +2544,7 @@
                     console.error('加载成员数据失败:', err);
                     const container = document.getElementById('team-members-container');
                     if (container) {
-                        container.innerHTML = '<div class="info-list" style="margin-top:0; text-align:center; color:var(--text-sub);">成员数据未加载，请检查 team_members.csv 或 main.html 内嵌数据。</div>';
+                        container.innerHTML = '<div class="info-list" style="margin-top:0; text-align:center; color:var(--text-sub);">成员数据未加载，请检查 team_members.csv 或 index.html 内嵌数据。</div>';
                     }
                 });
         }
